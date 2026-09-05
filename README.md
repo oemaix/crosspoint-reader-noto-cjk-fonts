@@ -41,3 +41,11 @@ The repository is organized by font family and region. Inside each folder, you w
 ├── NotoSerifCJKKR/    (Sizes 8-18)
 ├── NotoSerifCJKSC/    (Sizes 8-18)
 └── NotoSerifCJKTC/    (Sizes 8-18)
+
+```
+
+## How to Use
+
+1. Download the directory (e.g., `NotoSansCJKHK`) for your preferred language and style.
+2. Transfer the downloaded directory(e.g., `NotoSansCJKHK`) to the `/fonts` directory of the microSD card.
+3. Insert the microSD card, reboot, and select the new font from your device's reading settings.
