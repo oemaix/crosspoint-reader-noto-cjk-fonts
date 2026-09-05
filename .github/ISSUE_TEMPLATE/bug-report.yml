@@ -1,0 +1,41 @@
+name: Bug report
+description: Report any other problem with the fonts or the build scripts
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Font does not load / device error
+        - Wrong glyph shape for my region (e.g. Japanese form shown in Chinese text)
+        - Spacing, kerning or line-height problem
+        - Build / conversion script problem
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem. Screenshots or photos of the e-ink screen help a lot.
+    validations:
+      required: true
+
+  - type: input
+    id: font
+    attributes:
+      label: Font package and size
+      placeholder: "Noto Sans CJK SC, size 14"
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Release version / firmware
+      placeholder: "fonts v1.0.0, crosspoint firmware x.y.z"
+    validations:
+      required: false

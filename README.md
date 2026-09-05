@@ -1,5 +1,7 @@
 # Crosspoint Reader CJK Fonts
 
+**English** | [简体中文](README.zh-Hans.md) | [繁體中文](README.zh-Hant.md) | [日本語](README.ja.md) | [한국어](README.ko.md)
+
 Pre-converted CJK (Chinese, Japanese, Korean) fonts for the
 [Crosspoint reader](https://github.com/crosspoint-reader/crosspoint-reader),
 ready for immediate download and use.
@@ -40,6 +42,18 @@ weights, plus Latin/Greek/Cyrillic fallback glyphs from Noto Sans/Serif.
 3. Insert the microSD card, reboot, and select the new font in the reading
    settings of your device.
 
+## Missing Characters? Please Report Them!
+
+To keep file sizes manageable, only selected Unicode ranges are converted.
+If any character in your books shows up as a **blank box (tofu)**, please
+[**open a "Missing characters" issue**](../../issues/new?template=missing-glyphs.yml)
+— just paste the affected characters, and optionally their Unicode code
+points and your language. Your reports directly improve the coverage for
+everyone.
+
+For any other problem (font not loading, wrong glyph shapes, spacing
+issues), use the [bug report template](../../issues/new?template=bug-report.yml).
+
 ## Building Yourself
 
 Requirements: `bash`, `curl`, `unzip`, `git` and [uv](https://docs.astral.sh/uv/).
@@ -56,11 +70,19 @@ these steps and attaches the zipped results to a release whenever a `v*` tag
 is pushed. A manual `workflow_dispatch` run produces the same zips as build
 artifacts without creating a release.
 
+## License
+
+- The conversion scripts and workflow in this repository are licensed under
+  the **GNU GPL v2** ([LICENSE](LICENSE)).
+- The fonts (both the Noto sources and the converted `.cpfont` files) are
+  licensed under the **SIL Open Font License 1.1** ([OFL.txt](OFL.txt)),
+  which is included in every release zip.
+
 ## Credits
 
-- Fonts: [Noto CJK](https://github.com/notofonts/noto-cjk) and
+- Fonts: [Noto CJK](https://github.com/notofonts/noto-cjk) (© Adobe) and
   [Noto Latin/Greek/Cyrillic](https://github.com/notofonts/latin-greek-cyrillic)
-  by Google, licensed under the SIL Open Font License (OFL).
+  (© The Noto Project Authors), licensed under the SIL Open Font License 1.1.
 - Converter: `fontconvert_sdcard.py` from the
   [Crosspoint reader](https://github.com/crosspoint-reader/crosspoint-reader)
-  project.
+  project (MIT).

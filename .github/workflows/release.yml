@@ -33,12 +33,14 @@ jobs:
       # GitHub replaces spaces in release asset names with dots, so the zip
       # files use hyphens. The directory inside each zip keeps its real name
       # (e.g. "Noto Sans CJK HK/") and can be copied to the SD card as-is.
+      # The OFL license text ships in every zip, as the OFL requires.
       - name: Package zips
         run: |
           mkdir -p dist
           for kind in Sans Serif; do
             for region in SC TC HK JP KR; do
               dir="Noto $kind CJK $region"
+              cp OFL.txt "$dir/"
               zip -r "dist/Noto-$kind-CJK-$region.zip" "$dir"
             done
           done
@@ -66,3 +68,11 @@ jobs:
             Download the zip for your language/style, unzip it, and copy the
             contained directory (e.g. `Noto Sans CJK HK/`) into the `/fonts`
             directory of the microSD card.
+
+            **Seeing blank boxes (tofu) instead of characters?** Some Unicode
+            ranges may not be covered yet — please [report the missing
+            characters](https://github.com/${{ github.repository }}/issues/new?template=missing-glyphs.yml)
+            so coverage can be improved for everyone.
+
+            Fonts are licensed under the SIL Open Font License 1.1
+            (`OFL.txt` inside each zip).

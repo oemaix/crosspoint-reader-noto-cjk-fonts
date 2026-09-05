@@ -1,0 +1,63 @@
+name: Missing characters (tofu / blank boxes)
+description: Report characters or symbols that do not render with these fonts
+title: "[Missing glyphs] "
+labels: ["missing-glyphs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve the character coverage! The converter only
+        includes selected Unicode ranges to keep file sizes manageable, so it
+        is possible that a range used in your books was missed.
+
+  - type: textarea
+    id: characters
+    attributes:
+      label: Affected characters
+      description: Paste the characters or symbols that do not render (shown as blank boxes / tofu).
+      placeholder: "例: 𠮟 ㊙ ﹁"
+    validations:
+      required: true
+
+  - type: input
+    id: codepoints
+    attributes:
+      label: Unicode code points (optional)
+      description: If you know them, list the hex code points. You can look them up at https://unicodeplus.com
+      placeholder: "U+20B9F, U+3299"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language / regional variant
+      multiple: true
+      options:
+        - Simplified Chinese (SC)
+        - Traditional Chinese, Taiwan (TC)
+        - Traditional Chinese, Hong Kong (HK)
+        - Japanese (JP)
+        - Korean (KR)
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: family
+    attributes:
+      label: Font family
+      multiple: true
+      options:
+        - Noto Sans CJK
+        - Noto Serif CJK
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context (optional)
+      description: Where do these characters appear (book title, kind of text), which font size, which release version?
+    validations:
+      required: false
