@@ -1,0 +1,68 @@
+name: Build and release cpfonts
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Clone crosspoint-reader (converter scripts)
+        run: git clone --depth 1 https://github.com/crosspoint-reader/crosspoint-reader.git crosspoint-reader
+
+      - name: Download source fonts
+        run: ./download_fonts.bash
+
+      - name: Install Python dependencies
+        run: uv sync
+
+      - name: Convert fonts to cpfont
+        run: ./cjk_font_convert.bash
+
+      # GitHub replaces spaces in release asset names with dots, so the zip
+      # files use hyphens. The directory inside each zip keeps its real name
+      # (e.g. "Noto Sans CJK HK/") and can be copied to the SD card as-is.
+      - name: Package zips
+        run: |
+          mkdir -p dist
+          for kind in Sans Serif; do
+            for region in SC TC HK JP KR; do
+              dir="Noto $kind CJK $region"
+              zip -r "dist/Noto-$kind-CJK-$region.zip" "$dir"
+            done
+          done
+          (cd dist && sha256sum *.zip > SHA256SUMS.txt)
+
+      - name: Upload build artifacts (non-tag runs)
+        if: ${{ !startsWith(github.ref, 'refs/tags/') }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: cpfonts
+          path: dist/*
+
+      - name: Create GitHub release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/*.zip
+            dist/SHA256SUMS.txt
+          generate_release_notes: true
+          body: |
+            Pre-converted `.cpfont` files for the Crosspoint reader,
+            built from Noto Sans/Serif CJK (Regular + Bold, sizes 8-18).
+
+            Download the zip for your language/style, unzip it, and copy the
+            contained directory (e.g. `Noto Sans CJK HK/`) into the `/fonts`
+            directory of the microSD card.

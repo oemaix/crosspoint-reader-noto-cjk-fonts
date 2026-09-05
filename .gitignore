@@ -1,0 +1,9 @@
+tmp/
+.venv/
+crosspoint-reader
+dist/
+__pycache__/
+
+# Generated cpfont output (published via GitHub releases instead)
+Noto Sans CJK */
+Noto Serif CJK */

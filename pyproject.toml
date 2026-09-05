@@ -1,0 +1,9 @@
+[project]
+name = "crosspoint-reader-noto-cjk-fonts"
+version = "1.0.0"
+description = "Noto Sans/Serif CJK fonts converted to .cpfont for the Crosspoint reader"
+requires-python = ">=3.10"
+dependencies = [
+    "fonttools>=4.64.0",
+    "freetype-py>=2.5.1",
+]
